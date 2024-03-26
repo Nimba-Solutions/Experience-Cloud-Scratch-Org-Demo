@@ -3,6 +3,18 @@
         {
             "path": "force-app",
             "default": true
+        },
+        {
+            "path": "unpackaged/pre",
+            "default": false
+        },
+        {
+            "path": "unpackaged/post",
+            "default": false
+        },
+        {
+            "path": "unpackaged/config/experience/metadata",
+            "default": false
         }
     ],
     "namespace": null,
