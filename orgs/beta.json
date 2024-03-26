@@ -1,7 +1,19 @@
 {
   "orgName": "Experience-Cloud-Scratch-Org-Demo - Beta Test Org",
   "edition": "Developer",
+  "features": [
+    "Communities",
+    "DebugApex",
+    "RecordTypes"
+  ],
   "settings": {
+    "communitiesSettings": {
+      "enableNetworksEnabled": true,
+      "enableOotbProfExtUserOpsEnable": true
+    },
+    "experienceBundleSettings": {
+      "enableExperienceBundleMetadata": true
+    },
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
     },
@@ -16,5 +28,9 @@
       "sessionSettings": {
         "forceRelogin": false
       }
-    }  }
+    },
+    "languageSettings": {
+      "enableTranslationWorkbench": true
+    }
+  }
 }
