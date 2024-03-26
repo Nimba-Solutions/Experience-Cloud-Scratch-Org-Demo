@@ -26,3 +26,105 @@ tasks:
     run_tests:
         options:
             required_org_code_coverage_percent: 75
+
+
+    # Digital Experience Setup Tasks
+    create_experience:
+        group: "experience"
+        description: "Creates a Digital Experience site with the 'Customer Service' template"
+        class_path: cumulusci.tasks.salesforce.CreateCommunity
+        options:
+            template: Build Your Own
+            name: Demo Experience
+            url_path_prefix: mf
+            timeout: 60000
+            skip_existing: true
+
+    deploy_experience_cloud:
+        group: "experience"
+        description: Deploys the post-install configuration emulating a customer-created Experience Cloud
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            path: unpackaged/config/experience/metadata
+
+    publish_experience:
+        group: "experience"
+        description: Publishes the "Demo Experience" Experience Site in the target org using the Connect API
+        class_path: cumulusci.tasks.salesforce.PublishCommunity
+        options:
+            name: Demo Experience
+
+    create_experience_owner:
+        group: "experience"
+        description: POSTs json files to the Composite REST API endpoint.
+        class_path: cumulusci.tasks.salesforce.composite.CompositeApi
+        options:
+            data_files:
+                - "unpackaged/config/experience/users/owner.json"
+
+    create_experience_user:
+        group: "experience"
+        description: POSTs json files to the Composite REST API endpoint.
+        class_path: cumulusci.tasks.salesforce.composite.CompositeApi
+        options:
+            data_files:
+                - "unpackaged/config/experience/users/users.json"
+    
+    add_experience_login_button:
+        group: "experience"
+        description: Adds the "Log in to Experience as User" button to the Standard Contact layout
+        class_path: cumulusci.tasks.metadata_etl.layouts.AddRecordPlatformActionListItem
+        options:
+            api_names: "Contact-Contact Layout"
+            action_name: LoginToNetworkAsUser
+            action_type: StandardButton
+            place_first: True
+
+    add_network_members:
+        group: "experience"
+        description: "Create a NetworkMemberGroup record for the community user profile"
+        class_path: cumulusci.tasks.salesforce.network_member_group.CreateNetworkMemberGroups
+        options:
+            network_name: Demo Experience
+            profile_names:
+                - Customer Community User
+
+flows:
+    # Customize the Standard CumulusCI flow for creating development orgs
+    dev_org: 
+        steps:
+            2.9:
+                flow: make_experience
+
+    load_data:
+        steps:
+            3:
+                task: load_sample_data
+                options:
+                    drop_missing_schema: True
+                    dataset: experience_seed
+
+    make_experience:
+        steps:
+            1:
+                task: create_experience
+            2: 
+                flow: load_data
+            3:
+                task: create_experience_owner
+            4:
+                task: update_admin_profile
+            5:
+                task: deploy_experience_cloud
+            6:
+                task: update_admin_profile
+            7:
+                task: create_experience_user
+            8:
+                task: publish_experience
+            9:
+                task: add_experience_login_button
+            10:
+                task: add_network_members
+            11:
+                task: snapshot_changes
