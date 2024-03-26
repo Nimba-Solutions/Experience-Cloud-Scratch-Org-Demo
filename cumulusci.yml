@@ -36,7 +36,7 @@ tasks:
         options:
             template: Build Your Own
             name: Demo Experience
-            url_path_prefix: mf
+            url_path_prefix: demo
             timeout: 60000
             skip_existing: true
 
