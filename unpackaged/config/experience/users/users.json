@@ -1,0 +1,54 @@
+{
+    "allOrNone": true,
+    "compositeRequest": [
+        {
+            "method": "GET",
+            "url": "/services/data/v60.0/query/?q=SELECT+Id+FROM+Profile+WHERE+Name+IN+('Customer+Community+User')+ORDER+BY+Name",
+            "referenceId": "profiles"
+        },
+        {
+            "method": "GET",
+            "url": "/services/data/v60.0/query/?q=SELECT+Id+FROM+Contact+WHERE+Email+=+'demo.experience@nimbasolutions.com'",
+            "referenceId": "experience_contact"
+        },
+        {
+            "method": "POST",
+            "url": "/services/data/v60.0/sobjects/User",
+            "referenceId": "experience_user",
+            "body": {
+                "FirstName": "Experience",
+                "LastName": "User",
+                "Alias": "commUser",
+                "City": "San Francisco",
+                "ContactId": "@{experience_contact.records[0].Id}",
+                "Country": "USA",
+                "Email": "demo.experience@nimbasolutions.com",
+                "EmailEncodingKey": "utf-8",
+                "LanguageLocaleKey": "en_US",
+                "LocaleSidKey": "en_US",
+                "MobilePhone": "(650) 555-1212",
+                "Phone": "(650) 555-1212",
+                "PostalCode": "94105",
+                "ProfileId": "@{profiles.records[0].Id}",
+                "State": "CA",
+                "Street": "1 Market Street",
+                "TimeZoneSidKey": "America/Los_Angeles",
+                "Username": "@{experience_contact.records[0].Id}@nimbasolutions.com"
+            }
+        },
+        {
+            "method": "GET",
+            "url": "/services/data/v60.0/query/?q=SELECT+Id+FROM+PermissionSet+WHERE+Name+IN+('Demo_Experience_Member')+ORDER+BY+Name",
+            "referenceId": "permissionSets"
+        },
+        {
+            "method": "POST",
+            "url": "/services/data/v60.0/sobjects/PermissionSetAssignment",
+            "referenceId": "experience_user_permission_set_assignment",
+            "body": {
+                "PermissionSetId": "@{permissionSets.records[0].Id}",
+                "AssigneeId": "@{experience_user.id}"
+            }
+        }
+    ]
+}
