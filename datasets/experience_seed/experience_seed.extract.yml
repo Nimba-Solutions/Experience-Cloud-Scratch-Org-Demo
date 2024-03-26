@@ -1,0 +1,98 @@
+extract:
+  DandBCompany:
+    fields:
+    - DunsNumber
+    - Name
+  OperatingHours:
+    fields:
+    - Name
+    - TimeZone
+  Individual:
+    fields:
+    - LastName
+  Account:
+    fields:
+    - Name
+    - Description
+    - AccountNumber
+    - Phone
+    - Rating
+    - Site
+    - AccountSource
+    - Type
+    - Industry
+    - AnnualRevenue
+    - BillingPostalCode
+    - BillingStreet
+    - BillingState
+    - ShippingCity
+    - ShippingCountry
+    - ShippingState
+    - ShippingStreet
+    - ShippingPostalCode
+    - YearStarted
+    - Website
+    - Fax
+    - BillingCity
+    - BillingCountry
+    - BillingGeocodeAccuracy
+    - BillingLatitude
+    - BillingLongitude
+    - CleanStatus
+    - DunsNumber
+    - Jigsaw
+    - NaicsCode
+    - NaicsDesc
+    - NumberOfEmployees
+    - Ownership
+    - ShippingGeocodeAccuracy
+    - ShippingLatitude
+    - ShippingLongitude
+    - Sic
+    - SicDesc
+    - TickerSymbol
+    - Tradestyle
+  Contact:
+    fields:
+    - AccountId
+    - AssistantPhone
+    - Birthdate
+    - Phone
+    - CleanStatus
+    - Description
+    - Jigsaw
+    - Department
+    - DoNotCall
+    - Email
+    - EmailBouncedDate
+    - EmailBouncedReason
+    - HasOptedOutOfEmail
+    - HasOptedOutOfFax
+    - FirstName
+    - HomePhone
+    - IndividualId
+    - LastName
+    - LeadSource
+    - MailingCity
+    - MailingCountry
+    - MailingState
+    - MailingStreet
+    - MailingPostalCode
+    - Title
+    - OtherStreet
+    - OtherState
+    - OtherPhone
+    - Salutation
+    - ReportsToId
+    - AssistantName
+    - Fax
+    - MailingGeocodeAccuracy
+    - MailingLatitude
+    - MailingLongitude
+    - MobilePhone
+    - OtherCity
+    - OtherCountry
+    - OtherGeocodeAccuracy
+    - OtherLatitude
+    - OtherLongitude
+    - OtherPostalCode
